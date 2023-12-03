@@ -18,7 +18,6 @@ class BeeBot(Bot):
             if filename.endswith(".py"):
                 # cut off the .py from the file name
                 await self.load_extension(f"cogs.{filename[:-3]}")
-        
         await self.tree.sync()
         log.info('Loaded Cogs')
     async def on_ready(self):

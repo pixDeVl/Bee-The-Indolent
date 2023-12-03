@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from datetime import datetime
 
 class Meta(commands.Cog):
     def __init__(self, bot) -> None:
@@ -14,7 +15,7 @@ class Meta(commands.Cog):
         Args:
             interaction (discord.Interaction): The interaction from the app commands
         """
-        await interaction.response.send_message(f'Pong! `{str(round(self.bot.latency * 1000))}` ms')
+        await interaction.response.send_message(f'**Pong!** `{str(round(self.bot.latency * 1000))}` ms\n **Current Uptime:** `{str(datetime.now()-self.bot.start_time)}`')
         
     
     
