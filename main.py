@@ -6,6 +6,8 @@ import dotenv
 import datetime
 import logging
 
+GUILD = discord.Object(id=1007098070535786587)
+
 log = logging.getLogger('discord')
 class BeeBot(Bot):
     def __init__(self, *args, **kwargs):
@@ -18,7 +20,8 @@ class BeeBot(Bot):
             if filename.endswith(".py"):
                 # cut off the .py from the file name
                 await self.load_extension(f"cogs.{filename[:-3]}")
-        await self.tree.sync()
+        self.tree.copy_global_to(guild=discord.Object(1007098070535786587))
+        await self.tree.sync(guild=discord.Object(1007098070535786587))
         log.info('Loaded Cogs')
     async def on_ready(self):
         await self.change_presence(status=discord.Status.idle, activity=discord.Game(name='being eepy'))
