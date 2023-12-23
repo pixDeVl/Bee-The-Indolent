@@ -51,7 +51,7 @@ class Search(commands.GroupCog):
                     if value != '': value = f'Example: `{value}`'
                     mean_embed.add_field(name=defs['definition'], value=value, inline=False)
                 mean_embed_list.append(mean_embed)
-            msg_text = f'Showing definitions for "{request[0]['word']}" `{request[0]['phonetic']}`'
+            msg_text = f'Showing definitions for "{request[0]["word"]}" `{request[0]["phonetic"]}`'
             await interaction.response.send_message(msg_text, embeds=mean_embed_list)
         except: KeyError
         await interaction.response.send_message(r'¯\_(ツ)_/¯ No results could be found for "{}"'.format(word), ephemeral=True)
