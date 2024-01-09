@@ -22,6 +22,26 @@ class Pattify(commands.Cog):
         self.pattify_user = app_commands.ContextMenu(name='Pattify', callback=self.pattify_user)
         self.bot.tree.add_command(self.pattify_user)
 
+    
+    @app_commands.command(name='pattify')
+    async def pattify(self, interaction: discord.Interaction, image_url: str = None, user: discord.User = None):
+        """Make la pat pat from an image url or user avatar
+
+        Args:
+            interaction (discord.Interaction): The slash command interaction
+            image_url (str): The url of the image to be used
+        """
+        await interaction.response.defer()
+        if not image_url and not user:
+            await interaction.followup.send('You must provide an image url or user to pattify', ephemeral=True)
+        buff = []
+        if image_url:
+            buff.append(await PatPatCreator(image_url=image_url).create_gif())
+        if user:
+            buff.append(await PatPatCreator(image_url=user.display_avatar.url).create_gif())
+        files = [discord.File(i, "pat.gif") for i in buff]
+        await interaction.followup.send(files=files)
+    
     async def pattify_msg(self, interaction: discord.Interaction, message: discord.Message):
         """Message Context Menu to make a patting gif from all image links and attachments in the message
 

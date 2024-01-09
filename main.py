@@ -12,7 +12,7 @@ log = logging.getLogger('discord')
 class BeeBot(Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        discord.utils.setup_logging(level=logging.DEBUG)
+        discord.utils.setup_logging(level=logging.INFO)
         self.start_time = datetime.datetime.now()
         self.log = log
     async def setup_hook(self):
