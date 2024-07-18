@@ -24,6 +24,7 @@ class Pattify(commands.Cog):
 
     
     @app_commands.command(name='pattify')
+    @app_commands.allowed_installs(guilds=True, users=True)
     async def pattify(self, interaction: discord.Interaction, image_url: str = None, user: discord.User = None):
         """Make la pat pat from an image url or user avatar
 
